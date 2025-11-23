@@ -1,0 +1,9 @@
+VFS - Virtual file switch - system which makes kernel operate with different file systems.
+Standarize general file model, inode, dentry etc.
+
+/proc/sys/vm/swappiness is a heuristic parameter that controls the kernel's tendency to move pages from RAM to swap space. 
+Its value ranges from 0 to 100, with a default of 60. Higher values make the system more likely to move inactive pages to swap, 
+while lower values make the system prefer to keep pages in RAM as long as possible.
+
+dirty pages - memory pages in RAM which are modified and not sync with memory on hard drive.
+/proc/sys/vm/dirty_expire_centisecs - lifetime of dirty page
