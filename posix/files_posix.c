@@ -29,7 +29,7 @@ int main() {
     perror("fwrite failed");
   }
 
-  // Following function push data from C-lib buffers(STDIO) to RAM
+  // Following function push data from C-lib buffers(STDIO) to kernel
   fflush(fd1);
   // Data are stored in internal kernel buffers in RAM (cache pages), following
   // function transfers data to physical storage (updates also metadata from

@@ -13,7 +13,7 @@ int main() {
   fprintf(file, "%s", buffer);
   // fflush push data from Cbuffer to kernel
   // it is not mean data will be pushed to harddrive (sync/fsync)
-  fflush(file);
+  fflush(file); // it is not needed since fgetc operates on Clib buffer
   fseek(file, 0, SEEK_SET);
 
   // fgetc / ungetc just modify pointer in Cbuffer, nothing changed with

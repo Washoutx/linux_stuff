@@ -6,7 +6,6 @@
   do {                                                                         \
     if (ret < 0) {                                                             \
       perror(msg);                                                             \
-      return -1;                                                               \
     }                                                                          \
   } while (0)
 
@@ -20,8 +19,6 @@ int main() {
 
   ret = fprintf(file, "test,data,file");
   VALIDATE_RETURN(ret, "fprintf failed");
-  ret = fflush(file);
-  VALIDATE_RETURN(ret, "fflush failed");
   ret = fseek(file, 0, SEEK_SET);
   VALIDATE_RETURN(ret, "fseek failed");
 

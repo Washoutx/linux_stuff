@@ -7,7 +7,6 @@
   do {                                                                         \
     if (ret < 0) {                                                             \
       perror(msg);                                                             \
-      return -1;                                                               \
     }                                                                          \
   } while (0)
 
@@ -29,8 +28,10 @@ int main() {
   ret = fwrite(&d_src, sizeof(Data), 1, file);
   VALIDATE_RETURN(ret, "fwrite failed");
 
-  ret = fflush(file);
+  ret =
+      fflush(NULL); // NULL means all process stream data are push out to kernel
   VALIDATE_RETURN(ret, "fflush failed");
+  fsync(fileno(file)); // Sync to physical mem but not needed here.
 
   errno = 0;    // reset errno since rewind is void
   rewind(file); // pos=begin in file
