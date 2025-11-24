@@ -1,4 +1,4 @@
-#include <limits.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -10,37 +10,29 @@
     }                                                                          \
   } while (0)
 
+typedef struct Data {
+  char buffer[100];
+  int state;
+  bool is_valid;
+} Data;
+
 int main() {
-  int ret = 0;
+  Data d_src = {.buffer = "data...", .state = 1, .is_valid = true}, d_dest;
+
+  int ret = {};
   FILE *file = fopen("data.txt", "w+");
   if (NULL == file) {
     perror("fopen failed");
-    return -1;
   }
 
-  ret = fprintf(file, "test,data,file");
-  VALIDATE_RETURN(ret, "fprintf failed");
-  ret = fflush(file);
-  VALIDATE_RETURN(ret, "fflush failed");
-  ret = fseek(file, 0, SEEK_SET);
-  VALIDATE_RETURN(ret, "fseek failed");
+  ret = fwrite(&d_src, sizeof(Data), 1, file);
+  VALIDATE_RETURN(ret, "fwrite failed");
 
-  size_t size = LINE_MAX;
-  char buffer[size];
-  char *s = buffer;
-  char delimiter = ',';
+  ret = fread(&d_src, sizeof(Data), 1, file);
+  VALIDATE_RETURN(ret, "fread failed");
 
-  while (--size > 0 && (ret = fgetc(file)) != EOF && (*s++ = ret) != delimiter)
-    ;
-  ;
-
-  if (ret == delimiter) {
-    *(--s) = '\0';
-  } else {
-    *s = '\0';
-  }
-
-  printf("data=%s", buffer);
+  printf(".buffer=%s, .state=%d, .is_valid=%d", d_src.buffer, d_src.state,
+         d_src.is_valid);
 
   ret = fclose(file);
   VALIDATE_RETURN(ret, "fclose failed");
