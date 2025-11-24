@@ -1,3 +1,4 @@
+#include <errno.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -28,11 +29,20 @@ int main() {
   ret = fwrite(&d_src, sizeof(Data), 1, file);
   VALIDATE_RETURN(ret, "fwrite failed");
 
-  ret = fread(&d_src, sizeof(Data), 1, file);
+  ret = fflush(file);
+  VALIDATE_RETURN(ret, "fflush failed");
+
+  errno = 0;    // reset errno since rewind is void
+  rewind(file); // pos=begin in file
+  if (errno != 0) {
+    perror("rewind failed");
+  }
+
+  ret = fread(&d_dest, sizeof(Data), 1, file);
   VALIDATE_RETURN(ret, "fread failed");
 
-  printf(".buffer=%s, .state=%d, .is_valid=%d", d_src.buffer, d_src.state,
-         d_src.is_valid);
+  printf(".buffer=%s, .state=%d, .is_valid=%d", d_dest.buffer, d_dest.state,
+         d_dest.is_valid);
 
   ret = fclose(file);
   VALIDATE_RETURN(ret, "fclose failed");
