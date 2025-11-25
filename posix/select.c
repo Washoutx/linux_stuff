@@ -33,7 +33,7 @@ int main() {
       }
     }
   }
-  // FILE* -> _IO_FILE* struct is a wrapper for file descriptos created by LibC
+  // FILE* -> _IO_FILE* struct is a wrapper for file descriptors created by LibC
   // when file is opened.
   return 0;
 }

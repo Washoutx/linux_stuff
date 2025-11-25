@@ -42,5 +42,6 @@ int main() {
       perror("fread failed");
     }
   }
+
   return 0;
 }
