@@ -1,0 +1,20 @@
+* VFS - Virtual file switch - system which makes kernel operate with different file systems.
+Standarize general file model, inode, dentry etc.
+
+* /proc/sys/vm/swappiness is a heuristic parameter that controls the kernel's tendency to move pages from RAM to swap space. 
+Its value ranges from 0 to 100, with a default of 60. Higher values make the system more likely to move inactive pages to swap, 
+while lower values make the system prefer to keep pages in RAM as long as possible.
+
+* dirty pages - memory pages in RAM which are modified and not sync with memory on hard drive.
+/proc/sys/vm/dirty_expire_centisecs - lifetime of dirty page
+
+* malloc can allocate more memory than RAM+SWAP file because it ask kernel only for address space, not the physical memory. When we use
+some of this memory then 'page fault' interrupt is triggered. We can allocate more than available because of something called overcommit
+/proc/sys/vm/overcommit_memory - option is stored here. It can be one of the following:
+0 – heuristic behavior (default)
+1 – allow overcommit without limits
+2 – DO NOT allow allocating more than RAM + swap
+
+edge/level triggered - (ET/LT) - how epoll handle events. In ET epoll reports events only once until data is fully read. In this case we need to read() in loop. Otherwise in LT events are reported as long as data is available.
+blocking/non-blocking files - if file is opened with O_NONBLOCK and then file operations finish operation immediately no matter if the operation can be performed. CLib api doesn't support non-blocking file operations.
+I/O Elevator in linux - it is IO scheduler.

@@ -17,3 +17,4 @@ some of this memory then 'page fault' interrupt is triggered. We can allocate mo
 
 edge/level triggered - (ET/LT) - how epoll handle events. In ET epoll reports events only once until data is fully read. In this case we need to read() in loop. Otherwise in LT events are reported as long as data is available.
 blocking/non-blocking files - if file is opened with O_NONBLOCK and then file operations finish operation immediately no matter if the operation can be performed. CLib api doesn't support non-blocking file operations.
+I/O Elevator in linux - it is IO scheduler.
