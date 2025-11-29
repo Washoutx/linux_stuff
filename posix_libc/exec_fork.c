@@ -1,5 +1,5 @@
-#include <complex.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 int main() {
@@ -15,6 +15,7 @@ int main() {
     if (ret != 0) {
       perror("execl");
     }
+    exit(EXIT_SUCCESS);
   }
 
   return 0;

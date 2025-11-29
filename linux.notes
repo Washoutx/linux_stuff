@@ -16,5 +16,9 @@ some of this memory then 'page fault' interrupt is triggered. We can allocate mo
 2 – DO NOT allow allocating more than RAM + swap
 
 * edge/level triggered - (ET/LT) - how epoll handle events. In ET epoll reports events only once until data is fully read. In this case we need to read() in loop. Otherwise in LT events are reported as long as data is available.
+
 * blocking/non-blocking files - if file is opened with O_NONBLOCK and then file operations finish operation immediately no matter if the operation can be performed. CLib api doesn't support non-blocking file operations.
+
 * I/O Elevator in linux - it is IO scheduler.
+
+* Zombie process – a process that has finished its execution, but its metadata still exists in the kernel. The parent process must call wait() to collect the child’s exit status, after which the zombie will be removed. If the parent process doesn’t call wait() and then terminates, the init process (PID 1) becomes the new parent of the child and will eventually call wait() to clean it up.
