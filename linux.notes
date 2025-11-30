@@ -22,3 +22,10 @@ some of this memory then 'page fault' interrupt is triggered. We can allocate mo
 * I/O Elevator in linux - it is IO scheduler.
 
 * Zombie process – a process that has finished its execution, but its metadata still exists in the kernel. The parent process must call wait() to collect the child’s exit status, after which the zombie will be removed. If the parent process doesn’t call wait() and then terminates, the init process (PID 1) becomes the new parent of the child and will eventually call wait() to clean it up.
+
+* timeslice - period when process is executed
+
+* Completely Fair Scheduler (CFS) - old one scheduler
+* Earliest Eligible Virtual Deadline First (EEVDF) - new which based on process execution deadline 
+
+* jitter - desynchronization, like something took more time that should take in theory. 
