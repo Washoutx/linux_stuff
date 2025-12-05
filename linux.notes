@@ -29,3 +29,16 @@ some of this memory then 'page fault' interrupt is triggered. We can allocate mo
 * Earliest Eligible Virtual Deadline First (EEVDF) - new which based on process execution deadline 
 
 * jitter - desynchronization, like something took more time that should take in theory. 
+
+* MMU - part of the CPU which manage memory access and addresing. 
+* TLB - Translation Lookaside Buffer, Part of CPU(MMU), buffer in kernel which stores translation between physical and virtual memory adresses.
+* TLS - thread local storage
+
+* spurious wakeup - thread is wakeup but not needed
+* spurious failure - happen with 'soft' compare and change atomic functions.
+
+
+Cache coherence - MESI - Modified/Exclusive/Shared/Invalid(Invalid mark is cache invalidation)
+False sharing - two data are in the same cache line, like small struct, one thread change data which is not used by other
+thread but it is still generates miss cache since whole cache line is invalid
+Cache miss - data is not loaded in cache or is invalid
