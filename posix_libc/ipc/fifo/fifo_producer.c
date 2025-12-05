@@ -15,10 +15,16 @@ int main() {
     perror("open");
   }
 
-  char buffer[] = "Hello from other process";
+  char buffer[200];
 
-  if (-1 == write(fd, buffer, sizeof(buffer))) {
-    perror("write");
+  while (1) {
+    printf("Data to send=");
+    if (fgets(buffer, sizeof(buffer), stdin)) {
+      perror("fgets");
+    }
+    if (-1 == write(fd, buffer, sizeof(buffer))) {
+      perror("write");
+    }
   }
 
   close(fd);

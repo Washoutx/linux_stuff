@@ -16,14 +16,17 @@ int main() {
   }
 
   char buffer[200];
-  int read_size = read(fd, buffer, sizeof(buffer));
-  if (-1 == read_size) {
-    perror("read");
+  while (1) {
+
+    int read_size = read(fd, buffer, sizeof(buffer));
+    if (-1 == read_size) {
+      perror("read");
+    }
+
+    buffer[read_size] = '\0';
+    printf("%s", buffer);
   }
 
-  buffer[read_size] = '\0';
-
-  printf("%s", buffer);
   close(fd);
   return 0;
 }
